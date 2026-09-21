@@ -1,9 +1,10 @@
 import React, { useState } from 'react'
 import { useRouter } from "next/navigation";
 import { useDispatch } from "react-redux";
-import { validationSignup } from '../validator/auth.validator';
-import { signupApi } from '../services/auth.service';
-import { setUser } from '../../../redux/slice/authSlice';
+import { validationSignup } from '../features/auth/validator/auth.validator';
+
+import { setUser } from '../redux/slice/authSlice';
+import { signupApi } from '@/services/auth.service';
 
 const useSignup = () => {
     const [error, setError] = useState({});

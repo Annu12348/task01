@@ -11,6 +11,7 @@ import {
   REGISTER,
 } from 'redux-persist';
 import AuthSlice from './slice/authSlice';
+import ProductReducer from '@/redux/slice/productSlice'
 
 const persistConfig = {
   key: 'Vingo_root',
@@ -21,6 +22,7 @@ const persistConfig = {
 
 const rootReducer = combineReducers({
   Auth: AuthSlice,
+  Product: ProductReducer
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
