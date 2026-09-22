@@ -7,7 +7,7 @@ import productRoutes from "./routes/product.routes.js"
 
 const allowedOrigins = [
   "http://localhost:3000",
-  "https://task01-mu.vercel.app",
+  "https://ecommerce-n0a7dzgbb-annu-singhs-projects.vercel.app",
 ];
 
 const app = express();
