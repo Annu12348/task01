@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { addProductApi } from "@/features/product/services/product.service";
+import { addProductApi } from "../services/product.service";
 
 export const useProductAdd = () => {
   const [loading, setLoading] = useState(false);

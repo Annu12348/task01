@@ -2,7 +2,6 @@ import Link from 'next/link';
 import React from 'react'
 import { MdLightMode } from "react-icons/md";
 import { AiTwotoneShop } from "react-icons/ai";
-import { FaSearch } from "react-icons/fa";
 
 const Navbar = () => {
     return (

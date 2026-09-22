@@ -1,5 +1,4 @@
 import React from 'react'
-import SignupLeft from '../../../features/auth/components/signup/SignupLeft'
 import LoginForm from '../../../features/auth/components/login/LoginForm'
 
 const page = () => {

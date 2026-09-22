@@ -1,4 +1,4 @@
-import axiosInstance from "@/lib/axios/client";
+import axiosInstance from "../../lib/axios/client";
 
 export const getProductsApi = async ({
   search = "",

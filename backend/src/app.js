@@ -5,16 +5,19 @@ import userRoutes from "./routes/user.routes.js"
 import errorHandlingMiddleware from './middleware/errorHandling.middleware.js';
 import productRoutes from "./routes/product.routes.js"
 
+const allowedOrigins = [
+  "http://localhost:3000",
+  "https://task01-mu.vercel.app",
+];
+
 const app = express();
 app.use(express.json())
 app.use(
-    cors({
-      origin: [
-        "http://localhost:3000"
-      ],
-      credentials: true,
-    })
-  );
+  cors({
+    origin: allowedOrigins,
+    credentials: true,
+  })
+);
 app.use(cookieParser())
 
 app.use("/api/auth", userRoutes)

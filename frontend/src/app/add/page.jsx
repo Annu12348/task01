@@ -2,8 +2,8 @@
 
 import { useRouter } from "next/navigation";
 
-import ProductForm from "@/features/product/components/ProductForm";
-import { useProductAdd } from "@/features/product/hooks/useProductAdd";
+import ProductForm from "../../features/product/components/ProductForm";
+import { useProductAdd } from "../../features/hooks/useProductAdd";
 
 const AddProductPage = () => {
   const router = useRouter();
