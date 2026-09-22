@@ -10,8 +10,8 @@ import {
   PURGE,
   REGISTER,
 } from 'redux-persist';
-import AuthSlice from './slice/authSlice';
-import ProductReducer from '@/redux/slice/productSlice'
+import AuthSlice from '../redux/slice/authSlice';
+import ProductReducer from '../redux/slice/productSlice'
 
 const persistConfig = {
   key: 'Vingo_root',

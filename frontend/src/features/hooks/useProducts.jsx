@@ -3,8 +3,8 @@
 import { useCallback, useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 
-import { getProductsApi } from "@/services/product.service";
-import { setProducts } from "@/redux/slice/productSlice";
+import { getProductsApi } from "../services/product.service";
+import { setProducts } from "../redux/slice/productSlice";
 
 export const useProductRead = ({
   search = "",

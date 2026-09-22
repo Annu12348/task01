@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useState } from "react";
 
-import { getProductByIdApi } from "@/features/product/services/product.service";
+import { getProductByIdApi } from "../services/product.service";
 
 export const useProductById = (productId) => {
   const [product, setProduct] = useState(null);

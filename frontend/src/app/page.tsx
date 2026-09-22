@@ -3,12 +3,12 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 
-import ProductSearch from "@/features/product/ProductSearch";
-import ProductFilters from "@/features/product/ProductFilter";
-import ProductGrid from "@/features/product/ProductGrid";
-import { useProductRead } from "@/hooks/useProducts";
+import ProductSearch from "../features/product/components/ProductSearch";
+import ProductFilters from "../features/product/components/ProductFilter";
+import ProductGrid from "../features/product/components/ProductGrid";
+import { useProductRead } from "@/features/hooks/useProducts";
 import { useRouter } from "next/navigation";
-import { useProductDelete } from "@/hooks/useProductDelete"
+import { useProductDelete } from "@/features/hooks/useProductDelete"
 import Navbar from "../components/common/Navbar";
 
 const ProductsPage = () => {

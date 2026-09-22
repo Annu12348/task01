@@ -1,11 +1,11 @@
 "use client"
 
 import React, { useState } from 'react'
-import { validationLogin } from '../features/auth/validator/auth.validator';
+import { validationLogin } from '../auth/validator/auth.validator';
 import { useRouter } from "next/navigation";
 import { useDispatch } from 'react-redux';
 import { setUser } from "../redux/slice/authSlice";
-import { loginApi } from '@/services/auth.service';
+import { loginApi } from '../services/auth.service';
 
 const useLogin = () => {
     const [error, setError] = useState({});

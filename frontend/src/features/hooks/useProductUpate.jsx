@@ -1,27 +1,32 @@
 "use client";
 
 import { useState } from "react";
-import { deleteProductApi } from "@/services/product.service";
 
-export const useProductDelete = () => {
+import { updateProductApi } from "../services/product.service";
+
+export const useProductUpdate = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
-  const deleteProduct = async (productId) => {
+  const updateProduct = async (productId, productData) => {
     try {
       setLoading(true);
       setError("");
 
-      const response = await deleteProductApi(productId);
+      const response = await updateProductApi(
+        productId,
+        productData
+      );
 
       return response;
     } catch (error) {
       const message =
         error?.response?.data?.message ||
         error?.message ||
-        "Failed to delete product";
+        "Failed to update product";
 
       setError(message);
+
       throw error;
     } finally {
       setLoading(false);
@@ -29,7 +34,7 @@ export const useProductDelete = () => {
   };
 
   return {
-    deleteProduct,
+    updateProduct,
     loading,
     error,
   };
