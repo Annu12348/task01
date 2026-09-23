@@ -5,9 +5,9 @@ import { useEffect, useState } from "react";
 const initialFormData = {
   productName: "",
   price: "",
-  description: "",
-  imageUrl: "",
   category: "",
+  image: null,
+  description: "",
 };
 
 const ProductForm = ({
@@ -18,24 +18,44 @@ const ProductForm = ({
   submitLabel = "Add Product",
 }) => {
   const [formData, setFormData] = useState(initialFormData);
+  const [previewUrl, setPreviewUrl] = useState("");
 
-  // Pre-fill form when editing an existing product
+  // Pre-fill form when editing
   useEffect(() => {
     if (initialData) {
       setFormData({
-        name: initialData.productName || "",
+        productName: initialData.productName ?? "",
         price: initialData.price ?? "",
-        description: initialData.description || "",
-        image: initialData.imageUrl || initialData.imageUrl || "",
-        category: initialData.category || "",
+        category: initialData.category ?? "",
+        image: null,
+        description: initialData.description ?? "",
       });
+
+      setPreviewUrl(initialData.imageUrl ?? "");
     } else {
       setFormData(initialFormData);
+      setPreviewUrl("");
     }
   }, [initialData]);
 
   const handleChange = (event) => {
-    const { name, value } = event.target;
+    const { name, value, files } = event.target;
+
+    if (name === "image") {
+      const file = files?.[0] || null;
+
+      setFormData((previous) => ({
+        ...previous,
+        image: file,
+      }));
+
+      if (file) {
+        const url = URL.createObjectURL(file);
+        setPreviewUrl(url);
+      }
+
+      return;
+    }
 
     setFormData((previous) => ({
       ...previous,
@@ -46,7 +66,19 @@ const ProductForm = ({
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    await onSubmit?.(formData);
+    const data = new FormData();
+
+    data.append("productName", formData.productName);
+    data.append("price", formData.price);
+    data.append("category", formData.category);
+    data.append("description", formData.description);
+
+    // Only append image when user selected a new image
+    if (formData.image) {
+      data.append("image", formData.image);
+    }
+
+    await onSubmit?.(data);
   };
 
   return (
@@ -54,7 +86,7 @@ const ProductForm = ({
       onSubmit={handleSubmit}
       className="space-y-6 rounded-xl border border-gray-200 bg-white p-6 shadow-sm"
     >
-      {/* Form Error */}
+      {/* Error */}
       {error && (
         <div className="rounded-lg border border-red-200 bg-red-50 p-3 text-sm text-red-600">
           {error}
@@ -64,17 +96,17 @@ const ProductForm = ({
       {/* Product Name */}
       <div>
         <label
-          htmlFor="name"
+          htmlFor="productName"
           className="mb-2 block text-sm font-medium text-gray-700"
         >
           Product Name
         </label>
 
         <input
-          id="name"
-          name="name"
+          id="productName"
+          name="productName"
           type="text"
-          value={formData.name}
+          value={formData.productName}
           onChange={handleChange}
           placeholder="Enter product name"
           required
@@ -128,25 +160,36 @@ const ProductForm = ({
         />
       </div>
 
-      {/* Image URL */}
+      {/* Image */}
       <div>
         <label
           htmlFor="image"
           className="mb-2 block text-sm font-medium text-gray-700"
         >
-          Image URL
+          Product Image
         </label>
 
         <input
           id="image"
           name="image"
-          type="url"
-          value={formData.image}
+          type="file"
+          accept="image/*"
           onChange={handleChange}
-          placeholder="https://example.com/product.jpg"
+          required={!initialData}
           disabled={loading}
-          className="w-full rounded-lg border border-gray-300 px-4 py-2.5 text-sm text-gray-900 outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-100 disabled:cursor-not-allowed disabled:bg-gray-100"
+          className="w-full rounded-lg border border-gray-300 bg-white px-4 py-2.5 text-sm text-gray-700 outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-100 disabled:cursor-not-allowed disabled:bg-gray-100"
         />
+
+        {/* Image Preview */}
+        {previewUrl && (
+          <div className="mt-4 overflow-hidden rounded-lg border border-gray-200 bg-gray-50">
+            <img
+              src={previewUrl}
+              alt="Product preview"
+              className="h-48 w-full object-contain p-3"
+            />
+          </div>
+        )}
       </div>
 
       {/* Description */}

@@ -32,7 +32,7 @@ export const getProductByIdApi = async (productId) => {
 
 export const addProductApi = async (productData) => {
   return await axiosInstance.post(
-    "/product/add",
+    "/product/create",
     productData,
     {
       withCredentials: true,
